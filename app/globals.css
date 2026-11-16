@@ -1,0 +1,188 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #faf6f0;
+  color: #3a2f28;
+  font-family: 'Arial Hebrew', 'Segoe UI', Tahoma, Arial, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+}
+
+.screen {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 24px 20px 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin: 0 0 4px;
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  color: #8a7a6b;
+  margin: 0 0 28px;
+  font-size: 1rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 1.05rem;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 14px;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  border: 1px solid #ddd0c0;
+  margin-bottom: 4px;
+}
+
+button {
+  font-size: 1.15rem;
+  padding: 16px;
+  border-radius: 16px;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background: #c9765a;
+  color: #fff;
+}
+
+.btn-primary:disabled {
+  background: #e0c3b7;
+}
+
+.btn-secondary {
+  background: #f1e7da;
+  color: #3a2f28;
+}
+
+.btn-record {
+  background: #b23a3a;
+  color: #fff;
+}
+
+.btn-record.recording {
+  background: #7a1f1f;
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.photo-preview {
+  width: 100%;
+  border-radius: 14px;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.hint {
+  color: #8a7a6b;
+  font-size: 0.95rem;
+  margin-top: 6px;
+}
+
+.status-banner {
+  text-align: center;
+  padding: 14px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+}
+
+.status-success {
+  background: #e4f0df;
+  color: #3a6b2a;
+}
+
+.status-error {
+  background: #f6dede;
+  color: #8a2a2a;
+}
+
+.gate {
+  text-align: center;
+}
+
+.memory-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.memory-media {
+  width: 100%;
+  display: block;
+  background: #eee;
+}
+
+.memory-body {
+  padding: 16px 18px 20px;
+}
+
+.memory-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0 0 8px;
+}
+
+.memory-transcript {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #4a3f36;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.memory-status {
+  font-size: 0.9rem;
+  color: #8a7a6b;
+  margin-top: 8px;
+}
+
+.audio-player {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.nav-link {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  color: #c9765a;
+  text-decoration: none;
+  font-weight: bold;
+}
