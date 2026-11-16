@@ -53,22 +53,31 @@ http://localhost:3000/album.
 
 ## 4. Deploy it somewhere real
 
-**Important:** this app stores photos, clips and a small JSON file
-directly on disk (see `data/` and `public/uploads/`). That's simple
+**Important:** this app stores photos, clips, voice notes and a small
+JSON file on disk, under `DATA_DIR` (see `lib/db.js`). That's simple
 and fine for an MVP, but it means you need a host with a **persistent
-disk** — not a serverless platform like plain Vercel, where the
-filesystem resets on every deploy.
+volume** that survives redeploys — not a serverless platform like
+plain Vercel, where the filesystem resets on every deploy.
 
-Easiest options:
-- **Railway** or **Render** — both support a small always-on
-  container with a persistent volume, free/cheap tier to start.
+### Railway
+
+1. New Project → Deploy from GitHub repo → pick this repo.
+2. Add a **Volume** to the service (Settings → Volumes), mount path
+   e.g. `/data`.
+3. Set environment variables (Settings → Variables):
+   - `DATA_DIR=/data` (must match the volume's mount path)
+   - `OPENAI_API_KEY`, `RUNWAY_API_KEY`
+   - `UPLOAD_ACCESS_CODE`, `ALBUM_ACCESS_CODE`
+4. Railway auto-detects Next.js and runs `npm run build` / `npm run
+   start` — no changes needed there.
+5. Settings → Networking → Generate Domain to get a public URL.
+
+### Other options
+- **Render** — same idea: a Web Service with a persistent disk
+  mounted at some path, set `DATA_DIR` to that path.
 - **A small VPS** (DigitalOcean, Hetzner) — run `npm run build && npm
-  run start` behind a process manager like `pm2`, point a domain or
-  just use the IP.
-
-Whichever you pick, set the four environment variables from
-`.env.local` in the host's dashboard (don't commit `.env.local` to
-git — it's already in `.gitignore`).
+  run start` behind a process manager like `pm2`; `DATA_DIR` can just
+  be a normal folder on disk since the VPS itself persists.
 
 ## 5. Send grandma the link
 

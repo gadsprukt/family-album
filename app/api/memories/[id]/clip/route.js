@@ -1,11 +1,11 @@
 import fs from 'fs';
 import path from 'path';
 import { NextResponse } from 'next/server';
-import { getMemory, updateMemory } from '@/lib/db';
+import { getMemory, updateMemory, DATA_DIR } from '@/lib/db';
 import { checkAnimation } from '@/lib/runway';
 import { isValidCode } from '@/lib/auth';
 
-const UPLOAD_DIR = path.join(process.cwd(), 'public', 'uploads');
+const UPLOAD_DIR = path.join(DATA_DIR, 'uploads');
 
 // Called by the album/upload page every few seconds while a clip is
 // still processing, to check whether Runway has finished it yet.
@@ -40,7 +40,7 @@ export async function GET(request, { params }) {
 
       const updated = updateMemory(memory.id, {
         clipStatus: 'ready',
-        clipUrl: `/uploads/${clipFilename}`,
+        clipUrl: `/api/uploads/${clipFilename}`,
       });
       return NextResponse.json({ memory: updated });
     }

@@ -2,5 +2,5 @@ node_modules/
 .next/
 .env.local
 data/memories.json
-public/uploads/*
-!public/uploads/.gitkeep
+data/uploads/
+!data/.gitkeep

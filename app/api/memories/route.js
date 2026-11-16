@@ -2,12 +2,16 @@ import fs from 'fs';
 import path from 'path';
 import { nanoid } from 'nanoid';
 import { NextResponse } from 'next/server';
-import { saveMemory, listMemories, updateMemory } from '@/lib/db';
+import { saveMemory, listMemories, updateMemory, DATA_DIR } from '@/lib/db';
 import { transcribeHebrewAudio } from '@/lib/whisper';
 import { startAnimation } from '@/lib/runway';
 import { isValidCode } from '@/lib/auth';
 
-const UPLOAD_DIR = path.join(process.cwd(), 'public', 'uploads');
+// Uploaded files live under DATA_DIR (the persistent volume on a real
+// host), not under /public — /public isn't writable at runtime on
+// hosts that rebuild the container on every deploy. Files are served
+// back out through /api/uploads/[filename].
+const UPLOAD_DIR = path.join(DATA_DIR, 'uploads');
 
 function ensureUploadDir() {
   if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR, { recursive: true });
@@ -64,8 +68,8 @@ export async function POST(request) {
   const memory = {
     id,
     personName,
-    photoUrl: `/uploads/${photoFilename}`,
-    audioUrl: audioFilename ? `/uploads/${audioFilename}` : null,
+    photoUrl: `/api/uploads/${photoFilename}`,
+    audioUrl: audioFilename ? `/api/uploads/${audioFilename}` : null,
     transcript,
     clipUrl: null,
     clipStatus: 'pending',
